@@ -23,3 +23,31 @@ npm install -g dotenv dotenv-cli react-scripts
 
 ### Folder Setup
 
+- classroom
+	- dotnet
+	- react
+	- iis-dev
+	- iis-prod
+	- cypress
+
+### .NET Web API
+
+Create new api template `name=classroom` output to dotnet folder
+```shell
+dotnet new webapi -n classroom -o dotnet
+```
+We can test the api already, cd into dotnet folder
+```shell
+dotnet run
+```
+```shell
+Building...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: https://localhost:7129
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5086
+```
+Now visit swagger ui testing website at our localhost:
+https://localhost:7129/swagger/index.html
+
+
