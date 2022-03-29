@@ -1,7 +1,7 @@
 ### Internal Training Guide
-Level 1: Design website using ReactJS
-Level 2: Setup web interface using dotnet core web api
-Level 3: (Extra) Learn entity framework and MSSQL database 
+- Level 1: Design website using ReactJS
+- Level 2: Setup web interface using dotnet core web api
+- Level 3: (Extra) Learn entity framework and MSSQL database 
 
 ### Environment Setup
 - Install [npm ](https://nodejs.org/en/download/ "npm ")
@@ -241,3 +241,14 @@ Now visit swagger ui testing website at our localhost:
 https://localhost:[port]/swagger/index.html
 
 > But..... for now, react app & web api are not talking to each other
+
+
+
+
+### Folder Setup
+This is your folders look like:
+- classroom
+	- dotnet
+	- reactapp
+	- iis-dev
+	- iis-prod
