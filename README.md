@@ -1,4 +1,4 @@
-### Internal Training Guide
+### Internal Team Training Tutorial
 1. ReactJS UI design
 2. dotnet core web api
 3. (Extra) dotnet entity framework core to MSSQL database
@@ -65,7 +65,7 @@ npm install react-router-dom@6
 In `pages` add files `Home.tsx`  `About.tsx`
 
 ```javascript
-//Home.tsx
+//pages/Home.tsx
 import { Heading } from "@chakra-ui/react"
 
 export default function Home (){
@@ -75,7 +75,7 @@ export default function Home (){
 }
 ```
 ```javascript
-//About.tsx
+//pages/About.tsx
 import { Heading } from "@chakra-ui/react"
 
 export default function About (){
@@ -117,7 +117,7 @@ http://localhost:3000/about
 In `components` add file `Navbar.tsx`
 
 ```javascript
-//Navbar.tsx
+//components/Navbar.tsx
 import { Link } from "react-router-dom";
 import { HStack } from "@chakra-ui/react";
 
@@ -142,14 +142,14 @@ import Navbar from "./components/Navbar";
 ......
 export const App = () => (
   <ChakraProvider theme={theme}>
-		<BrowserRouter>
-//2. Add Navbar component
-		<Navbar />
-		  <Routes>
-			<Route path="/" element={<Home />} />
-			<Route path="/about" element={<About />} />
-		  </Routes>
-		</BrowserRouter>
+    <BrowserRouter>
+//2. Place Navbar component here
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </BrowserRouter>
   </ChakraProvider>
 )
 ```
@@ -160,9 +160,59 @@ export const App = () => (
 > https://reactrouter.com/docs/en/v6/getting-started/tutorial
 
 #### Input Forms
+> How do users talk to server?
+> Input form is the most common method
 ```shell
 npm install react-hook-form yup @hookform/resolvers @types/yup
 ```
+In `components` add file `MyName.tsx`
+
+```javascript
+//components/MyName.tsx
+import { Button, FormLabel, Input } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
+
+//Define the "shape" of this form
+//name is a string
+type MyNameInput = {
+  name: string;
+};
+
+export default function MyName() {
+//useForm help us manage to whole form    
+  const { register, handleSubmit } = useForm<MyNameInput>();
+
+  const onSubmit = (values: MyNameInput) => {
+//Here we talk to server
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <FormLabel>My name is </FormLabel>
+      <Input {...register("name")} />
+      <Button type="submit" >Say hello</Button>
+    </form>
+  );
+}
+```
+
+```javascript
+//pages/Home.tsx
+//1. Add import
+import { Heading, Box } from "@chakra-ui/react";
+import MyName from "../components/MyName";
+export default function Home() {
+  return (
+    <Box>
+//2. Place Heading and MyName in a Box
+      <Heading>I'm a Home page</Heading>
+      <MyName />
+    </Box>
+  );
+}
+
+```
+
 ------------
 
 
