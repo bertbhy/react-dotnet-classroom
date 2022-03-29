@@ -1,8 +1,7 @@
 ### Internal Training Guide
-1. ReactJS frontend
-2. .NET core api backend
-3. MSSQL entity framework core
-4. Cypress testing 
+1. ReactJS UI design
+2. dotnet core web api
+3. (Extra) dotnet entity framework core to MSSQL database
 
 ### Environment Setup
 - Install [npm ](https://nodejs.org/en/download/ "npm ")
@@ -26,7 +25,11 @@ npm install -g dotenv dotenv-cli react-scripts
 2. Open with Visual Studio Code
 
 This is beginning of every project.
-### Create React App
+
+------------
+
+
+### 1. Create React App
 Open new Terminal <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>\`(Back Quote)</kbd>
 Run this at Terminal in `classroom` folder
 ```shell
@@ -36,10 +39,132 @@ Wait a few minutes to create new React apps with TypeScript and Chakra UI
 Your react app is located at  `cd reactapp`
 
 Let&apos;s try `npm start`
-You will see the Learn React page at: 
+You will see the Learn Chakra page at: 
 http://localhost:3000/
 
-<kbd>Ctrl</kbd> + <kbd>C</kbd> in Terminal to stop running
+> <kbd>Ctrl</kbd> + <kbd>C</kbd> in Terminal to stop running
+
+Happy coding!! :tw-1f600:
+Get ready to add more great stuff to your first react app
+- Pages
+- Input Forms
+- Web API
+
+#### Folder Setup
+Add more new folders for future use, like this:
+- classroom
+	- reactapp
+		- components
+		- pages
+		- services
+
+#### Pages
+```shell
+npm install react-router-dom@6
+```
+In `pages` add files `Home.tsx`  `About.tsx`
+
+```javascript
+//Home.tsx
+import { Heading } from "@chakra-ui/react"
+
+export default function Home (){
+    return (
+        <Heading>I'm a Home page</Heading>
+    )
+}
+```
+```javascript
+//About.tsx
+import { Heading } from "@chakra-ui/react"
+
+export default function About (){
+    return (
+        <Heading>I'm a About page</Heading>
+    )
+}
+```
+
+We will edit `App.tsx` to make setup routing to `/Home ` and `/About`
+Open `App.tsx`, we modify the app to our own content
+```javascript
+//App.tsx
+......
+//1. Add imports 
+import Home from "./pages/Home"
+import About from "./pages/About"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+......
+export const App = () => (
+  <ChakraProvider theme={theme}>
+//2. Replace inside ChakraProvider
+		<BrowserRouter>
+		  <Routes>
+			<Route path="/" element={<Home />} />
+			<Route path="/about" element={<About />} />
+		  </Routes>
+		</BrowserRouter>
+  </ChakraProvider>
+)
+```
+
+`npm start` to see the result, both links should work
+http://localhost:3000/
+http://localhost:3000/about
+
+> Of course, we need a Navbar
+
+In `components` add file `Navbar.tsx`
+
+```javascript
+//Navbar.tsx
+import { Link } from "react-router-dom";
+import { HStack } from "@chakra-ui/react";
+
+export default function Navbar() {
+  return (
+    <HStack>
+      <Link to="/">
+          Home
+      </Link>
+      <Link to="/about">
+          About
+      </Link>
+    </HStack>
+  );
+}
+```
+```javascript
+//App.tsx
+......
+//1. Add imports 
+import Navbar from "./components/Navbar";
+......
+export const App = () => (
+  <ChakraProvider theme={theme}>
+		<BrowserRouter>
+//2. Add Navbar component
+		<Navbar />
+		  <Routes>
+			<Route path="/" element={<Home />} />
+			<Route path="/about" element={<About />} />
+		  </Routes>
+		</BrowserRouter>
+  </ChakraProvider>
+)
+```
+
+> You can feel free customize the pages
+> https://chakra-ui.com/docs/components/overview
+> Learn more from React Router Tutorial
+> https://reactrouter.com/docs/en/v6/getting-started/tutorial
+
+#### Input Forms
+```shell
+npm install react-hook-form yup @hookform/resolvers @types/yup
+```
+------------
+
 
 ### New dotnet Web API
 Open new Terminal <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>\`(Back Quote)</kbd>
@@ -73,4 +198,3 @@ This is your folders look like:
 	- reactapp
 	- iis-dev
 	- iis-prod
-	- cypress
