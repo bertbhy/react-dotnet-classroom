@@ -98,12 +98,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 export const App = () => (
   <ChakraProvider theme={theme}>
 //2. Replace inside ChakraProvider
-		<BrowserRouter>
-		  <Routes>
-			<Route path="/" element={<Home />} />
-			<Route path="/about" element={<About />} />
-		  </Routes>
-		</BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </BrowserRouter>
   </ChakraProvider>
 )
 ```
@@ -242,13 +242,3 @@ https://localhost:[port]/swagger/index.html
 
 > But..... for now, react app & web api are not talking to each other
 
-
-
-
-### Folder Setup
-This is your folders look like:
-- classroom
-	- dotnet
-	- reactapp
-	- iis-dev
-	- iis-prod
