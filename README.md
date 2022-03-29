@@ -1,7 +1,7 @@
-### Internal Team Training Tutorial
-1. ReactJS UI design
-2. dotnet core web api
-3. (Extra) dotnet entity framework core to MSSQL database
+### Internal Training Guide
+Level 1: Design website using ReactJS
+Level 2: Setup web interface using dotnet core web api
+Level 3: (Extra) Learn entity framework and MSSQL database 
 
 ### Environment Setup
 - Install [npm ](https://nodejs.org/en/download/ "npm ")
@@ -98,13 +98,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 export const App = () => (
   <ChakraProvider theme={theme}>
 //2. Replace inside ChakraProvider
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </BrowserRouter>
+		<BrowserRouter>
+		  <Routes>
+			<Route path="/" element={<Home />} />
+			<Route path="/about" element={<About />} />
+		  </Routes>
+		</BrowserRouter>
   </ChakraProvider>
 )
 ```
@@ -156,13 +155,17 @@ export const App = () => (
 ```
 
 > You can feel free customize the pages
-> https://chakra-ui.com/docs/components/overview
+
+https://chakra-ui.com/docs/components/overview
+
 > Learn more from React Router Tutorial
-> https://reactrouter.com/docs/en/v6/getting-started/tutorial
+
+https://reactrouter.com/docs/en/v6/getting-started/tutorial
 
 #### Input Forms
 > How do users talk to server?
-> Input form is the most common method
+
+
 ```shell
 npm install react-hook-form yup @hookform/resolvers @types/yup
 ```
