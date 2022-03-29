@@ -98,12 +98,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 export const App = () => (
   <ChakraProvider theme={theme}>
 //2. Replace inside ChakraProvider
-		<BrowserRouter>
-		  <Routes>
-			<Route path="/" element={<Home />} />
-			<Route path="/about" element={<About />} />
-		  </Routes>
-		</BrowserRouter>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </BrowserRouter>
   </ChakraProvider>
 )
 ```
