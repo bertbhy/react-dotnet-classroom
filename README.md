@@ -6,7 +6,7 @@
 
 ### Environment Setup
 - Install [npm ](https://nodejs.org/en/download/ "npm ")
-Edit config file C:\Users\[user]\.npmrc
+Edit config file C:\Users\\[user]\\.npmrc
 ```javascript
     proxy=http://[user]:[pw]@[proxy]:8080/
     https-proxy=http://[user]:[pw]@[proxy]:8080/
@@ -19,24 +19,35 @@ npm install -g dotenv dotenv-cli react-scripts
 - Install [dotnet sdk](https://dotnet.microsoft.com/en-us/download/dotnet/6.0 "dotnet sdk")
 - Install [vscode](https://code.visualstudio.com/ "vscode") 
 - Download [swagger-codegen-cli](https://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/2.4.24/swagger-codegen-cli-2.4.24.jar "swagger-codegen-cli")
-    You can save to `C:\Java\swagger-codegen-cli.jar`
+    You can save as to this location `C:\Java\swagger-codegen-cli.jar`
 
-### Folder Setup
+### Classroom Project
+1. New a folder `classroom`
+2. Open with Visual Studio Code
 
-- classroom
-	- dotnet
-	- react
-	- iis-dev
-	- iis-prod
-	- cypress
+This is beginning of every project.
+### Create React App
+Open new Terminal <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>\`(Back Quote)</kbd>
+Run this at Terminal in `classroom` folder
+```shell
+npx create-react-app reactapp --template @chakra-ui/typescript
+```
+Wait a few minutes to create new React apps with TypeScript and Chakra UI
+Your react app is located at  `cd reactapp`
 
-### .NET Web API
+Let&apos;s try `npm start`
+You will see the Learn React page at: 
+http://localhost:3000/
 
-Create new api template `name=classroom` output to dotnet folder
+<kbd>Ctrl</kbd> + <kbd>C</kbd> in Terminal to stop running
+
+### New dotnet Web API
+Open new Terminal <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>\`(Back Quote)</kbd>
+Run this at Terminal in `classroom` folder
 ```shell
 dotnet new webapi -n classroom -o dotnet
 ```
-We can test the api already, cd into dotnet folder
+Your web api is located at cd dotnet
 ```shell
 dotnet run
 ```
@@ -48,6 +59,18 @@ info: Microsoft.Hosting.Lifetime[14]
       Now listening on: http://localhost:5086
 ```
 Now visit swagger ui testing website at our localhost:
-https://localhost:7129/swagger/index.html
+https://localhost:[port]/swagger/index.html
+
+> But..... for now, react app & web api are not talking to each other
 
 
+
+
+### Folder Setup
+This is your folders look like:
+- classroom
+	- dotnet
+	- reactapp
+	- iis-dev
+	- iis-prod
+	- cypress
