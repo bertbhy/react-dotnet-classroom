@@ -241,14 +241,3 @@ Now visit swagger ui testing website at our localhost:
 https://localhost:[port]/swagger/index.html
 
 > But..... for now, react app & web api are not talking to each other
-
-
-
-
-### Folder Setup
-This is your folders look like:
-- classroom
-	- dotnet
-	- reactapp
-	- iis-dev
-	- iis-prod
