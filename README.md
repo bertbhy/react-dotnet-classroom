@@ -1,19 +1,19 @@
 ### Internal Training
 - [Environment Setup](#environment-setup)
 - [Classroom Project](#classroom-project)
-- [Level 1: Create React App](#level-1--create-react-app)
+- [Level 1: Create React App](#level-1-create-react-app)
   * [Folder Setup](#folder-setup)
   * [Pages](#pages)
   * [Input Forms](#input-forms)
   * [State](#state)
   * [Validation](#validation)
-- [Level 2: Web Interface](#level-2--web-interface)
+- [Level 2: Web Interface](#level-2-web-interface)
   * [New dotnet core API](#new-dotnet-core-api)
   * [Swagger Code Gen](#swagger-code-gen)
-  * [Exercise: display api data](#exercise--display-api-data)
-- [Level 3: Database Interface](#level-3--database-interface)
-  * [Swagger Code Gen, again](#swagger-code-gen--again)
-  * [Exercise: Say Hello to server](#exercise--say-hello-to-server)
+  * [Exercise: display api data](#exercise-display-api-data)
+- [Level 3: Database Interface](#level-3-database-interface)
+  * [Swagger Code Gen, again](#swagger-code-gen-again)
+  * [Exercise: Say Hello to server](#exercise-say-hello-to-server)
 
 ### Environment Setup
 - Install [npm ](https://nodejs.org/en/download/ "npm ")
@@ -374,7 +374,7 @@ app.UseAuthorization();
 #### Swagger Code Gen
 - Download [swagger-codegen-cli](https://mvnrepository.com/artifact/io.swagger.codegen.v3/swagger-codegen-cli "swagger-codegen-cli")
     You can save as to this location `C:\Java\swagger-codegen-cli.jar`
-- ```shell
+```shell
 npm install isomorphic-fetch
 ```
 - /reactapp/src/services/
