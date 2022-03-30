@@ -352,6 +352,7 @@ info: Microsoft.Hosting.Lifetime[14]
 ```
 Now visit swagger ui testing website at our localhost:
 https://localhost:7129/swagger/index.html
+(!! local port in your machine might not be 7129 !!)
 
 `GetWeatherForecast` will give you some weather information
 ```json
@@ -401,7 +402,7 @@ import { WeatherForecastApi } from "../services/api"
   const onSubmit = (values: MyNameInput) => {
     setName(values.name);
 //2. Calling web api  
-    let api = new WeatherForecastApi({}, "https://localhost:7257")
+    let api = new WeatherForecastApi({}, "https://localhost:7129")
     api.getWeatherForecast().then(w => {
 //3. We will do something with the data
       console.log(w);
@@ -484,7 +485,7 @@ namespace classroom
 dotnet-aspnet-codegenerator controller -name HelloController -async -api -m Hello -dc HelloContext -outDir Controllers
 ```
 
-`dotnet run`  and take a look at https://localhost:7257/swagger/index.html
+`dotnet run`  and take a look at https://localhost:7129/swagger/index.html
 We have a brand new Hello interface ` Get / Post / Put / Delete`
 
 > Keep it running, we are going to update the React part
