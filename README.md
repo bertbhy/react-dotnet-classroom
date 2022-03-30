@@ -33,6 +33,7 @@ Open new Terminal <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>\`(Back Quote)</kbd>
 Run this at Terminal in `classroom` folder
 ```shell
 npx create-react-app reactapp --template @chakra-ui/typescript
+npm install react-scripts@4.0.3
 ```
 Wait a few minutes to create new React apps with TypeScript and Chakra UI
 Your react app is located at  `cd reactapp`
@@ -340,88 +341,72 @@ https://localhost:7129/swagger/index.html
     "summary": "Warm"
   },
 ```
+Open Program.cs, add a line to allow cross origin for testing
+```csharp
+//Add this line before app.UseAuthorization();
+app.UseCors(b => b.AllowAnyHeader().AllowAnyMethod().AllowCredentials().SetIsOriginAllowed(_ => true));
+app.UseAuthorization();
+```
 
 > But..... for now, react app & web api are not talking to each other
 
 ### Swagger Code Gen
 - Download [swagger-codegen-cli](https://mvnrepository.com/artifact/io.swagger.codegen.v3/swagger-codegen-cli "swagger-codegen-cli")
     You can save as to this location `C:\Java\swagger-codegen-cli.jar`
-
-- Setup /reactapp/src/services/
-	- typescript-fetch (Folder contain codegen template files)
+- ```shell
+npm install isomorphic-fetch
+```
+- /reactapp/src/services/
+	- typescript-fetch (Download from [swagger-codegen-generators](https://github.com/swagger-api/swagger-codegen-generators/tree/master/src/main/resources/handlebars "swagger-codegen-generators"))
 	- swagger.json (Download from https://localhost:7129/swagger/v1/swagger.json)
+
+> You can modify template files inside typescript-fetch
 
 Here is the script to use Swagger Code Gen
 ```shell
 java -jar C:/java/swagger-codegen-cli.jar generate -i ./src/services/swagger.json -o ./src/services -t ./src/services/typescript-fetch -l typescript-fetch -DsupportsES6=true
 ```
-Or add to package.json
-```json
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "api": "java -jar C:/java/swagger-codegen-cli.jar generate -i ./src/services/swagger.json -o ./src/services -t ./src/services/typescript-fetch -l typescript-fetch -DsupportsES6=true"
-  },
-```
+- /reactapp/src/services/
+	- api.ts is created by Swagger. Run code gen **everytime** your web api is updated.
 
 > Nexct, we can show weather information in MyName
 
 ```javascript
-import {
-  Button,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Input,
-} from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
-import { useState } from "react";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+//MyName.tsx
+......
 //1. Add imports
 import { WeatherForecastApi } from "../services/api"
-
-type MyNameInput = {
-  name: string;
-};
-
-const schema = yup.object().shape({
-  name: yup.string().min(3).max(20).required(),
-});
-
-export default function MyName() {
-  const [name, setName] = useState<string>("");
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<MyNameInput>({
-    mode: "onSubmit",
-    resolver: yupResolver(schema),
-  });
-
+......
   const onSubmit = (values: MyNameInput) => {
     setName(values.name);
 //2. Calling web api  
     let api = new WeatherForecastApi({}, "https://localhost:7257")
     api.getWeatherForecast().then(w => {
 //3. We will do something with the data
+      console.log(w);
     })
   };
-
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <FormControl isInvalid={!!errors.name}>
-        <FormLabel>My name is {name}</FormLabel>
-        <Input {...register("name")} />
-        <FormErrorMessage>{errors?.name?.message}</FormErrorMessage>
-      </FormControl>
-      <Button type="submit">Say hello</Button>
-    </form>
-  );
-}
-
+......
 ```
+> Look at <kbd>F12</kbd> console in Chrome to view ` console.log(w);` result
 
+### Exercise: display api data
+> Modify MyName.tsx to show weather forcast below Say hello
+
+```javascript
+  const [forcast, setForcast] = useState<WeatherForecast[]>();
+```
+```javascript
+  setForcast(r);
+```
+```javascript
+      {forcast?.map(value => {
+        return (
+        <Box>
+          <Text>{value.date?.toString()}</Text>
+          <Text>{value.summary}</Text>
+          <Text>{value.temperatureC}</Text>
+        </Box>
+        )})
+      }
+```
