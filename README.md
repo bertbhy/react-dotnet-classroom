@@ -1,4 +1,19 @@
-### Internal Training Guide
+### Internal Training
+- [Environment Setup](#environment-setup)
+- [Classroom Project](#classroom-project)
+- [Level 1: Create React App](#level-1--create-react-app)
+  * [Folder Setup](#folder-setup)
+  * [Pages](#pages)
+  * [Input Forms](#input-forms)
+  * [State](#state)
+  * [Validation](#validation)
+- [Level 2: Web Interface](#level-2--web-interface)
+  * [New dotnet core API](#new-dotnet-core-api)
+  * [Swagger Code Gen](#swagger-code-gen)
+  * [Exercise: display api data](#exercise--display-api-data)
+- [Level 3: Database Interface](#level-3--database-interface)
+  * [Swagger Code Gen, again](#swagger-code-gen--again)
+  * [Exercise: Say Hello to server](#exercise--say-hello-to-server)
 
 ### Environment Setup
 - Install [npm ](https://nodejs.org/en/download/ "npm ")
