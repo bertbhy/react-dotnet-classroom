@@ -327,9 +327,9 @@ export default function MyName() {
 
 > The simpliest way to explain our architecture
 
-|  Browser |   | Server   |  | Database|
-| ------------ | ------------ | ------------ | ------------ |
-| ReactJS  |  <-Web API->   | Dotnet  | <-EF->  | SQL   |
+  Browser |   | Server   |  | Database
+--- | --- | --- | --- | ---
+ ReactJS  |  <-Web API->   | Dotnet  | <-EF->  | SQL   
 
 
 
@@ -437,9 +437,9 @@ import { WeatherForecastApi } from "../services/api"
 
 > Roundtrip from React to SQL
 
-|  Browser |   | Server   |  | Database|
-| ------------ | ------------ | ------------ | ------------ |
-| ReactJS  |  <-Web API->   | Dotnet  | <-EF->  | SQL   |
+  Browser |   | Server   |  | Database
+--- | --- | --- | --- | ---
+ ReactJS  |  <-Web API->   | Dotnet  | <-EF->  | SQL   
 
 - You need 
 	- `dotnet tool install --global dotnet-ef`
