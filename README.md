@@ -17,7 +17,7 @@
 
 ### Environment Setup
 - Install [npm ](https://nodejs.org/en/download/ "npm ")
-Edit config file C:\Users\\[user]\\.npmrc
+- Edit config file C:\Users\\[user]\\.npmrc
 ```javascript
     proxy=http://[user]:[pw]@[proxy]:8080/
     https-proxy=http://[user]:[pw]@[proxy]:8080/
