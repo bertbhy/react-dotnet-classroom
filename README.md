@@ -1,7 +1,4 @@
 ### Internal Training Guide
-- Level 1: Design website using ReactJS
-- Level 2: Setup web interface using dotnet core web api
-- Level 3: (Extra) Learn entity framework and MSSQL database 
 
 ### Environment Setup
 - Install [npm ](https://nodejs.org/en/download/ "npm ")
@@ -28,7 +25,7 @@ This is beginning of every project.
 ------------
 
 
-### 1. Create React App
+### Level 1: Create React App
 Open new Terminal <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>\`(Back Quote)</kbd>
 Run this at Terminal in `classroom` folder
 ```shell
@@ -311,8 +308,17 @@ export default function MyName() {
 > That&apos;s it for now. We learn how to setup the server side in the next section 
 
 ------------
+### Level 2: Web Interface
 
-### New dotnet Web API
+> The simpliest way to explain our architecture
+
+|  Browser |   | Server   |  | Database|
+| ------------ | ------------ | ------------ | ------------ |
+| ReactJS  |  <-Web API->   | Dotnet  | <-EF->  | SQL   |
+
+
+
+#### New dotnet core API
 Open new Terminal <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>\`(Back Quote)</kbd>
 Run this at Terminal in `classroom` folder
 ```shell
@@ -350,7 +356,7 @@ app.UseAuthorization();
 
 > But..... for now, react app & web api are not talking to each other
 
-### Swagger Code Gen
+#### Swagger Code Gen
 - Download [swagger-codegen-cli](https://mvnrepository.com/artifact/io.swagger.codegen.v3/swagger-codegen-cli "swagger-codegen-cli")
     You can save as to this location `C:\Java\swagger-codegen-cli.jar`
 - ```shell
@@ -390,7 +396,8 @@ import { WeatherForecastApi } from "../services/api"
 ```
 > Look at <kbd>F12</kbd> console in Chrome to view ` console.log(w);` result
 
-### Exercise: display api data
+#### Exercise: display api data
+
 > Modify MyName.tsx to show weather forcast below Say hello
 
 ```javascript
@@ -410,3 +417,77 @@ import { WeatherForecastApi } from "../services/api"
         )})
       }
 ```
+
+### Level 3: Database Interface
+
+> Roundtrip from React to SQL
+
+|  Browser |   | Server   |  | Database|
+| ------------ | ------------ | ------------ | ------------ |
+| ReactJS  |  <-Web API->   | Dotnet  | <-EF->  | SQL   |
+
+- You need 
+	- `dotnet tool install --global dotnet-ef`
+	- `dotnet tool install -g dotnet-aspnet-codegenerator`
+	
+```shell
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.InMemory
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+```
+```csharp
+//Program.cs
+global using Microsoft.EntityFrameworkCore;
+......
+var builder = WebApplication.CreateBuilder(args);
+// Add database service after builder.
+builder.Services.AddDbContext<classroom.HelloContext>(w => w.UseInMemoryDatabase("hello"));
+......
+```
+```csharp
+//HelloContext.cs
+namespace classroom
+{
+    public class HelloContext : DbContext
+    {
+        public HelloContext(DbContextOptions<HelloContext> options)
+            : base(options) { }
+
+        public DbSet<Hello> Hellos { get; set; }
+    }
+
+    public class Hello
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+    }
+}
+```
+> It is time to code-gen our first api controller
+
+```shell
+dotnet-aspnet-codegenerator controller -name HelloController -async -api -m Hello -dc HelloContext -outDir Controllers
+```
+
+`dotnet run`  and take a look at https://localhost:7257/swagger/index.html
+We have a brand new Hello interface ` Get / Post / Put / Delete`
+
+> Keep it running, we are going to update the React part
+
+#### Swagger Code Gen, again
+- /reactapp/src/services/
+	- swagger.json (Download from https://localhost:7129/swagger/v1/swagger.json)
+
+```shell
+java -jar C:/java/swagger-codegen-cli.jar generate -i ./src/services/swagger.json -o ./src/services -t ./src/services/typescript-fetch -l typescript-fetch -DsupportsES6=true
+```
+
+#### Exercise: Say Hello to server
+Modify `MyName.tsx` to complete following requirement
+1. onSubmit will `post` your name 
+2. `get` all the names from api 
+3. Display a list of `Hello[ ]`
+
+
+
+
